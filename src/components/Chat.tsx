@@ -102,8 +102,10 @@ const Chat: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loadingElapsedTime, setLoadingElapsedTime] = useState(0);
+  const [textareaHeight, setTextareaHeight] = useState(1);
   
   const messageContainerRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const loadingStartTimeRef = useRef<number | null>(null);
   const loadingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
@@ -119,6 +121,20 @@ const Chat: React.FC = () => {
   const scrollToBottom = useCallback(() => {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+    }
+  }, []);
+
+  const adjustTextareaHeight = useCallback(() => {
+    if (textareaRef.current) {
+      // Reset height to get proper scrollHeight
+      textareaRef.current.style.height = 'auto';
+      
+      // Calculate new height
+      const scrollHeight = textareaRef.current.scrollHeight;
+      const maxHeight = 240; // Maximum height in pixels
+      
+      // Set the actual height
+      textareaRef.current.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
     }
   }, []);
 
@@ -192,6 +208,11 @@ const Chat: React.FC = () => {
     
     const userMessage = inputMessage.trim();
     setInputMessage('');
+    
+    // Reset textarea height
+    if (textareaRef.current) {
+      textareaRef.current.style.height = '64px';
+    }
     
     // Add user message immediately
     const userMessageObj: Message = {
@@ -475,6 +496,10 @@ const Chat: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, scrollToBottom]);
+  
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [inputMessage, adjustTextareaHeight]);
 
   useEffect(() => {
     return () => {
@@ -523,13 +548,20 @@ const Chat: React.FC = () => {
       <div className="border-t border-light bg-card px-6 py-4">
         <div className="flex gap-4 items-end">
           <textarea
+            ref={textareaRef}
             value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
+            onChange={(e) => {
+              setInputMessage(e.target.value);
+              adjustTextareaHeight();
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
             disabled={isLoading}
-            rows={1}
-            className="flex-1 resize-none border-elegant rounded-md px-6 py-5 text-xl bg-background focus:outline-none focus:ring-2 focus:ring-foreground disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-muted-foreground"
+            className="flex-1 resize-none border-elegant rounded-md px-6 py-4 text-xl bg-background focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-inset disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-muted-foreground overflow-y-auto transition-all duration-200 leading-7 scrollbar-thin"
+            style={{ 
+              minHeight: '64px',
+              maxHeight: '240px' // Adjusted for better line fitting
+            }}
           />
           <button
             onClick={sendMessage}

@@ -230,6 +230,35 @@
   background-color: hsl(var(--foreground) / 0.6);
 }
 
+/* Textarea scrollbar styling */
+textarea::-webkit-scrollbar {
+  width: 8px;
+  margin-right: 2px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.5);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.8);
+}
+
+/* Firefox scrollbar for textarea */
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.5) transparent;
+  scrollbar-gutter: stable;
+}
+
 /* Markdown Styles for Assistant Messages */
 .prose {
   color: inherit;
