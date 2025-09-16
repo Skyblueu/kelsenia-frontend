@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Favicon</title>
+</head>
+<body>
+    <h1>Favicon Generator</h1>
+    <canvas id="canvas" width="32" height="32"></canvas>
+    <br>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+    <br>
+    <a id="download32" download="favicon-32.png">Download 32x32</a>
+    <br>
+    <a id="download16" download="favicon-16.png">Download 16x16</a>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const canvas16 = document.getElementById('canvas16');
+        const ctx16 = canvas16.getContext('2d');
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, 32, 32);
+        ctx16.clearRect(0, 0, 16, 16);
+        
+        // Scale of Justice - 32x32
+        ctx.fillStyle = 'black';
+        
+        // Base
+        ctx.fillRect(15, 24, 2, 4);
+        ctx.fillRect(12, 28, 8, 2);
+        
+        // Central pole
+        ctx.fillRect(15, 6, 2, 18);
+        
+        // Horizontal beam
+        ctx.fillRect(8, 6, 16, 2);
+        
+        // Chains
+        ctx.fillRect(9, 8, 1, 6);
+        ctx.fillRect(10, 8, 1, 6);
+        ctx.fillRect(21, 8, 1, 6);
+        ctx.fillRect(22, 8, 1, 6);
+        
+        // Plates
+        ctx.beginPath();
+        ctx.moveTo(6, 14);
+        ctx.lineTo(13, 14);
+        ctx.lineTo(12, 18);
+        ctx.lineTo(7, 18);
+        ctx.closePath();
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.moveTo(19, 14);
+        ctx.lineTo(26, 14);
+        ctx.lineTo(25, 18);
+        ctx.lineTo(20, 18);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Top circle
+        ctx.beginPath();
+        ctx.arc(16, 4, 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Scale down to 16x16
+        ctx16.drawImage(canvas, 0, 0, 32, 32, 0, 0, 16, 16);
+        
+        // Create download links
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            document.getElementById('download32').href = url;
+        });
+        
+        canvas16.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            document.getElementById('download16').href = url;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tinos Font Faces */
+@font-face {
+  font-family: 'Tinos';
+  src: url('/fonts/Tinos-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tinos';
+  src: url('/fonts/Tinos-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tinos';
+  src: url('/fonts/Tinos-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tinos';
+  src: url('/fonts/Tinos-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Elegant Black & White Design System */
+@layer base {
+  :root {
+    /* Core Colors - Pure black and white with subtle grays */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    
+    /* Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    
+    /* Interactive States */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    
+    /* Borders */
+    --border: 0 0% 0%;
+    --border-light: 0 0% 90%;
+    --input: 0 0% 0%;
+    
+    /* Message Colors */
+    --user-bg: 0 0% 0%;
+    --user-fg: 0 0% 100%;
+    --assistant-bg: 0 0% 100%;
+    --assistant-fg: 0 0% 0%;
+    --error-bg: 0 0% 95%;
+    --error-fg: 0 0% 20%;
+    
+    /* Loading States */
+    --loading-dot: 0 0% 60%;
+    --loading-timer: 0 0% 40%;
+    
+    /* Sizes */
+    --radius: 12px;
+    --radius-lg: 18px;
+    
+    /* Fonts */
+    --font-family: 'Tinos', serif;
+  }
+  
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --muted: 0 0% 4%;
+    --muted-foreground: 0 0% 55%;
+    --border: 0 0% 100%;
+    --border-light: 0 0% 10%;
+    --input: 0 0% 100%;
+    --user-bg: 0 0% 100%;
+    --user-fg: 0 0% 0%;
+    --assistant-bg: 0 0% 0%;
+    --assistant-fg: 0 0% 100%;
+    --error-bg: 0 0% 5%;
+    --error-fg: 0 0% 80%;
+    --loading-dot: 0 0% 40%;
+    --loading-timer: 0 0% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family);
+    font-size: 20px; /* Base font size increased */
+    line-height: 1.6;
+    font-feature-settings: "liga" 1, "kern" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family);
+    font-weight: 700;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .animate-slide-in {
+    animation: slideInUp 0.3s ease-out;
+  }
+  
+  .animate-typing {
+    animation: typingDot 1.4s infinite;
+  }
+  
+  .animate-typing-delay-1 {
+    animation: typingDot 1.4s infinite 0.2s;
+  }
+  
+  .animate-typing-delay-2 {
+    animation: typingDot 1.4s infinite 0.4s;
+  }
+  
+  .animate-spin {
+    animation: spin 0.6s linear infinite;
+  }
+  
+  .font-tinos {
+    font-family: var(--font-family);
+  }
+  
+  .text-loading-timer {
+    color: hsl(var(--loading-timer));
+  }
+  
+  .bg-loading-dot {
+    background-color: hsl(var(--loading-dot));
+  }
+  
+  .bg-user {
+    background-color: hsl(var(--user-bg));
+    color: hsl(var(--user-fg));
+  }
+  
+  .bg-assistant {
+    background-color: hsl(var(--assistant-bg));
+    color: hsl(var(--assistant-fg));
+    border: 2px solid hsl(var(--border));
+  }
+  
+  .bg-error {
+    background-color: hsl(var(--error-bg));
+    color: hsl(var(--error-fg));
+    border-left: 4px solid hsl(var(--border));
+  }
+  
+  .border-elegant {
+    border: 2px solid hsl(var(--border));
+  }
+  
+  .border-light {
+    border: 1px solid hsl(var(--border-light));
+  }
+}
+
+/* Custom Scrollbar */
+.scrollbar-elegant {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
+}
+
+.scrollbar-elegant::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-elegant::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-elegant::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+.scrollbar-elegant::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--foreground) / 0.6);
+}
+
+/* Markdown Styles for Assistant Messages */
+.prose {
+  color: inherit;
+  max-width: none;
+}
+
+.prose p {
+  margin: 0 0 0.75rem 0;
+  line-height: 1.6;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  margin: 1rem 0 0.5rem 0;
+  font-weight: 700;
+  color: inherit;
+}
+
+.prose h1:first-child, .prose h2:first-child, .prose h3:first-child,
+.prose h4:first-child, .prose h5:first-child, .prose h6:first-child {
+  margin-top: 0;
+}
+
+.prose h1 { font-size: 1.5rem; }
+.prose h2 { font-size: 1.3rem; }
+.prose h3 { font-size: 1.1rem; }
+
+.prose ul, .prose ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin: 0.25rem 0;
+}
+
+.prose code {
+  background: hsl(var(--muted));
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: hsl(var(--muted));
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid hsl(var(--border));
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.prose a {
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  opacity: 0.8;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid hsl(var(--border-light));
+  margin: 1rem 0;
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.prose th, .prose td {
+  border: 1px solid hsl(var(--border-light));
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.prose th {
+  background: hsl(var(--muted));
+  font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .message-bubble {
+    max-width: 85% !important;
+  }
+  
+  .input-container {
+    padding: 1rem;
+  }
+}
