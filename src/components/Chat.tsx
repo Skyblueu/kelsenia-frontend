@@ -557,7 +557,7 @@ const Chat: React.FC = () => {
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
             disabled={isLoading}
-            className="flex-1 resize-none border-elegant rounded-md px-6 py-4 text-xl bg-background focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-inset disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-muted-foreground overflow-y-auto transition-all duration-200 leading-7 scrollbar-thin"
+            className="flex-1 resize-none border-0 rounded-md px-6 py-4 text-xl bg-background focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-muted-foreground overflow-y-auto transition-all duration-200 leading-7 scrollbar-thin"
             style={{ 
               minHeight: '64px',
               maxHeight: '240px' // Adjusted for better line fitting
