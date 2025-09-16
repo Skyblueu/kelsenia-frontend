@@ -259,6 +259,19 @@ textarea {
   scrollbar-gutter: stable;
 }
 
+/* Remove all focus styles from textarea */
+textarea:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+textarea:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* Markdown Styles for Assistant Messages */
 .prose {
   color: inherit;
